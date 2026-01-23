@@ -16,10 +16,8 @@ const {
 } = require('../controller/index'); 
 
 // ---------------- USER ----------------
-router.post('/users', userController.Create);
-// router.get('/users/:id', userController.findUser);
-// router.put('/users/:id', userController.updateUser);
-// router.delete('/users/:id', userController.deleteUser);
+router.post('/users', userController.Signup);
+router.post('/login', userController.Login);
 
 // ---------------- SUBSCRIPTION PLAN ----------------
 router.post('/subscriptionplans', subscriptionplanController.createSubscriptionPlan);
