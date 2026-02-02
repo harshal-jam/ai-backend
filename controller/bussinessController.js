@@ -2,6 +2,7 @@ const Business = require('../model/bussiness');
 
 exports.createBusiness = async (req, res) => {
   try {
+    const userid = req.user.id;
     const business = await Business.create(req.body);
     res.status(201).json({ success: true, data: business });
   } catch (error) {

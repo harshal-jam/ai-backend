@@ -9,7 +9,8 @@ const chatbotconversationController = require('./chatbotconversationController')
 const chatbotController = require('./chatbotController');
 const bussinessController = require('./bussinessController'); 
 const appoimentsController = require('./appoimentsController');
-
+const categoryController = require('./categoryController');
+const staffController = require('./staffController');
 module.exports = {
   userController,
   subscriptionplanController,
@@ -20,6 +21,8 @@ module.exports = {
   companysubscriptionController,
   chatbotconversationController,
   chatbotController,
+  categoryController,
   bussinessController,
-  appoimentsController
+  appoimentsController,
+  staffController
 };

@@ -13,7 +13,8 @@ exports.createService = async (req, res) => {
 // Get a single service by ID
 exports.findService = async (req, res) => {
   try {
-    const service = await Service.findById(req.params.id);
+    const userid = req.params.id
+    const service = await Service.find({user:userid});
     if (!service) {
       return res.status(404).json({ success: false, message: 'Service not found' });
     }

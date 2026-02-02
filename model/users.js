@@ -3,7 +3,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: ['business_admin', 'employee', 'super_admin'],
-    required: true
+    // required: true
   },
   name: {
     type: String
@@ -20,11 +20,11 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  status: {
-    type: String,
-    enum: ['active', 'inactive', 'suspended'],
-    default: 'active'
-  },
+  // status: {
+  //   type: String,
+  //   enum: ['active', 'inactive', 'suspended'],
+  //   default: 'active'
+  // },
   last_login: {
     type: Date
   },

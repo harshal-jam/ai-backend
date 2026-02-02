@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const businessSchema = new mongoose.Schema({
   owner_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: 'users',
     // required: true
   },
   business_name: {

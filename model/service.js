@@ -6,25 +6,26 @@ const serviceSchema = new mongoose.Schema({
     ref: 'Business',
     // required: true
   },
-  service_name: {
+  title: {
     type: String,
     required: true
   },
-  duration_minutes: {
+   category: {
+    type: String,
+    required:true
+  },
+  duration: {
+    type: String,
+    required: true
+  },
+   price: {
     type: Number,
     required: true
-  },
-  price: {
-    type: mongoose.Types.Decimal128,
-    required: true
-  },
-  description: {
-    type: String
   },
   status: {
     type: String,
     enum: ['active', 'inactive'],
-    default: 'active'
+    // default: 'active'
   }
 }, {
   timestamps: true 

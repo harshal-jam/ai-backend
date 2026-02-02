@@ -12,22 +12,32 @@ const {
   chatbotconversationController,
   chatbotController,
   bussinessController,
-  appoimentsController
+  appoimentsController,
+  categoryController,
+  staffController
 } = require('../controller/index'); 
-
+const auth = require('../middleware/auth')
 // ---------------- USER ----------------
 router.post('/users', userController.Signup);
 router.post('/login', userController.Login);
-
+// ---------------- CATEGORY ----------------
+router.post('/category',auth,categoryController.Create);
+router.get('/category/:id',auth,categoryController.find);
+router.put('/category/:id',auth,categoryController.update);
+router.delete('/category/:id',auth,categoryController.delete);
+//-----------------------staff-------------
+router.post('/staff', auth, staffController.createStaff);      // Add New
+router.get('/staff/:id', auth, staffController.getAllStaff);       // Table Listing
+router.put('/staff/:id', auth, staffController.updateStaff);   // Edit
+router.delete('/staff/:id', auth, staffController.deleteStaff);// Delete
 // ---------------- SUBSCRIPTION PLAN ----------------
 router.post('/subscriptionplans', subscriptionplanController.createSubscriptionPlan);
 router.get('/subscriptionplans/:id', subscriptionplanController.findSubscriptionPlan);
 router.put('/subscriptionplans/:id', subscriptionplanController.updateSubscriptionPlan);
 router.delete('/subscriptionplans/:id', subscriptionplanController.deleteSubscriptionPlan);
-
 // ---------------- SERVICE ----------------
-router.post('/services', serviceController.createService);
-router.get('/services/:id', serviceController.findService);
+router.post('/services',auth, serviceController.createService);
+router.get('/services', serviceController.findService);
 router.put('/services/:id', serviceController.updateService);
 router.delete('/services/:id', serviceController.deleteService);
 
