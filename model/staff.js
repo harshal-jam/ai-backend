@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
-const WorkingHourSchema = new mongoose.Schema({
-  day: {
-    type: String,
-    enum: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-  },
-  startTime: {
-    type: String,
-    default: null,
-  },
-  endTime: {
-    type: String,
-    default: null,
-  },
-  isDayOff: {
-    type: Boolean,
-    default: false,
-  },
-});
+// const WorkingHourSchema = new mongoose.Schema({
+//   day: {
+//     type: String,
+//     enum: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+//   },
+//   from: {
+//     type: String,
+//     default: null,
+//   },
+//   to: {
+//     type: String,
+//     default: null,
+//   },
+//   Of: {
+//     type: Boolean,
+//     default: false,
+//   },
+// });
 
 const StaffSchema = new mongoose.Schema({
   fullName: {
@@ -37,7 +37,25 @@ const StaffSchema = new mongoose.Schema({
       type: String,
     },
   ],
-  workingHours: [WorkingHourSchema], 
+  workingHours: {
+  day: {
+    type: String,
+    enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+  },
+  from: {
+    type: String,
+    default: null
+  },
+  to: {
+    type:String,
+    default: null
+  },
+  Of: {
+    type: Boolean,
+    default: false
+  }
+}
+
 }, { timestamps: true });
 
 module.exports = mongoose.model("Staff", StaffSchema);
