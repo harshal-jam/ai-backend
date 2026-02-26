@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 const appointmentSchema = new mongoose.Schema({
   // Reference to business
   business_id: {
@@ -27,49 +27,32 @@ const appointmentSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
-
-  customer_email: {
-    type: String,
-    required: true,
-    lowercase: true,
-    trim: true,
-  },
-
-  customer_phone: {
+phone: {
     type: String,
     trim: true,
   },
-
-  // Appointment date (only date part)
-  appointment_date: {
-    type: Date,
-    required: true,
+staff_name:{
+  type:String,
+  trim:true
+},
+  service:{
+    type:String,
   },
+  price:{
+    type:mongoose.Schema.Types.Decimal128,
 
-  // Appointment start time
-  start_time: {
-    type: String, // "HH:mm"
-    required: true,
   },
-
-  // Appointment end time
-  end_time: {
-    type: String, // "HH:mm"
-    required: true,
+  date:{
+    type:String,
   },
-
-  // Booking source (web, admin, chatbot, etc.)
-  booking_source: {
-    type: String,
-    enum: ["web", "admin", "chatbot", "mobile"],
-    default: "web",
+  time:{
+    type:String
   },
-
-  // Appointment status
-  status: {
-    type: String,
-    enum: ["pending", "confirmed", "completed", "cancelled", "no_show"],
-    default: "pending",
+  payment:{
+    type:String
+  },
+  status:{
+    type:String
   },
 },{timestamps:true});
-module.exports = mongoose.model("Appointment", appointmentSchema);
+export default mongoose.model("Appointment", appointmentSchema);

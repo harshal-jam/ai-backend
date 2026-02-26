@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const category = new mongoose.Schema({
     user:{
         type:mongoose.Schema.Types.ObjectId,
@@ -9,4 +9,4 @@ const category = new mongoose.Schema({
         trim:true
     }
 })
-module.exports=mongoose.model('category',category);
+export default mongoose.model('category',category);

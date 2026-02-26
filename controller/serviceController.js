@@ -1,7 +1,7 @@
-const Service = require('../model/service');
+import Service from '../model/service.js';
 
 // Create a new service
-exports.createService = async (req, res) => {
+export const createService = async (req, res) => {
   try {
     const service = await Service.create(req.body);
     res.status(201).json({ success: true, data: service });
@@ -10,13 +10,15 @@ exports.createService = async (req, res) => {
   }
 };
 
-// Get a single service by ID
-exports.findService = async (req, res) => {
+// Get a single service by user ID
+export const findService = async (req, res) => {
   try {
-    const userid = req.params.id
-    const service = await Service.find({user:userid});
-    if (!service) {
-      return res.status(404).json({ success: false, message: 'Service not found' });
+    const userid = req.params.id;
+    const service = await Service.find({ user: userid });
+    if (!service || service.length === 0) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Service not found' });
     }
     res.status(200).json({ success: true, data: service });
   } catch (error) {
@@ -25,7 +27,7 @@ exports.findService = async (req, res) => {
 };
 
 // Update a service by ID
-exports.updateService = async (req, res) => {
+export const updateService = async (req, res) => {
   try {
     const service = await Service.findByIdAndUpdate(
       req.params.id,
@@ -33,7 +35,9 @@ exports.updateService = async (req, res) => {
       { new: true }
     );
     if (!service) {
-      return res.status(404).json({ success: false, message: 'Service not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Service not found' });
     }
     res.status(200).json({ success: true, data: service });
   } catch (error) {
@@ -42,13 +46,17 @@ exports.updateService = async (req, res) => {
 };
 
 // Delete a service by ID
-exports.deleteService = async (req, res) => {
+export const deleteService = async (req, res) => {
   try {
     const service = await Service.findByIdAndDelete(req.params.id);
     if (!service) {
-      return res.status(404).json({ success: false, message: 'Service not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Service not found' });
     }
-    res.status(200).json({ success: true, message: 'Service deleted successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: 'Service deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

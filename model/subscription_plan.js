@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 const subscriptionPlanSchema = new mongoose.Schema({
 
   plan_name: {
@@ -26,14 +26,14 @@ const subscriptionPlanSchema = new mongoose.Schema({
 
   booking_limit: {
     type: Number,
-    default: 0, 
+    default: 0,
   },
   created_at: {
     type: Date,
     default: Date.now,
   },
 });
-module.exports = mongoose.model(
+export default mongoose.model(
   "SubscriptionPlan",
   subscriptionPlanSchema
 );

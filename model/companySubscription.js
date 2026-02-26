@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 const companySubscriptionSchema = new mongoose.Schema({
   
   business_id: {
@@ -35,7 +35,7 @@ const companySubscriptionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model(
+export default mongoose.model(
   "CompanySubscription",
   companySubscriptionSchema
 );

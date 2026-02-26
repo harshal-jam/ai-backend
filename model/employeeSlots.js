@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const employeeSlotSchema = new mongoose.Schema({
   employee_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -30,4 +30,4 @@ const employeeSlotSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("EmployeeSlot", employeeSlotSchema);
+export default mongoose.model("EmployeeSlot", employeeSlotSchema);

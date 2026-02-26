@@ -1,6 +1,6 @@
-const Business = require('../model/bussiness');
+import Business from '../model/bussiness.js';
 
-exports.createBusiness = async (req, res) => {
+export const createBusiness = async (req, res) => {
   try {
     const userid = req.user.id;
     const business = await Business.create(req.body);
@@ -9,32 +9,50 @@ exports.createBusiness = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-exports.findBusiness = async (req, res) => {
+
+export const findBusiness = async (req, res) => {
   try {
     const business = await Business.findById(req.params.id);
+    if (!business) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Business not found' });
+    }
     res.status(200).json({ success: true, data: business });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-exports.updateBusiness = async (req, res) => {
+export const updateBusiness = async (req, res) => {
   try {
     const business = await Business.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
+    if (!business) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Business not found' });
+    }
     res.status(200).json({ success: true, data: business });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-exports.deleteBusiness = async (req, res) => {
+export const deleteBusiness = async (req, res) => {
   try {
     const business = await Business.findByIdAndDelete(req.params.id);
-    res.status(200).json({ success: true, data: business });
+    if (!business) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Business not found' });
+    }
+    res
+      .status(200)
+      .json({ success: true, message: 'Business deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

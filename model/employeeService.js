@@ -1,4 +1,4 @@
-const mongoose=require('mongoose')
+import mongoose from 'mongoose';
 const employeeServiceSchema = new mongoose.Schema({
   employee_id: {
     type: Schema.Types.ObjectId,
@@ -12,4 +12,4 @@ const employeeServiceSchema = new mongoose.Schema({
     // required: true,
   },
 });
-module.exports=mongoose.model('Employeeservice',employeeServiceSchema)
+export default mongoose.model('Employeeservice',employeeServiceSchema)

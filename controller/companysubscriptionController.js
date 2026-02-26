@@ -1,7 +1,7 @@
-const CompanySubscription = require('../model/companySubscription');
+import CompanySubscription from '../model/companySubscription.js';
 
 // Create a new company subscription
-exports.createCompanySubscription = async (req, res) => {
+export const createCompanySubscription = async (req, res) => {
   try {
     const subscription = await CompanySubscription.create(req.body);
     res.status(201).json({ success: true, data: subscription });
@@ -11,11 +11,13 @@ exports.createCompanySubscription = async (req, res) => {
 };
 
 // Get a single company subscription by ID
-exports.findCompanySubscription = async (req, res) => {
+export const findCompanySubscription = async (req, res) => {
   try {
     const subscription = await CompanySubscription.findById(req.params.id);
     if (!subscription) {
-      return res.status(404).json({ success: false, message: 'Company subscription not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Company subscription not found' });
     }
     res.status(200).json({ success: true, data: subscription });
   } catch (error) {
@@ -24,7 +26,7 @@ exports.findCompanySubscription = async (req, res) => {
 };
 
 // Update a company subscription by ID
-exports.updateCompanySubscription = async (req, res) => {
+export const updateCompanySubscription = async (req, res) => {
   try {
     const subscription = await CompanySubscription.findByIdAndUpdate(
       req.params.id,
@@ -32,7 +34,9 @@ exports.updateCompanySubscription = async (req, res) => {
       { new: true }
     );
     if (!subscription) {
-      return res.status(404).json({ success: false, message: 'Company subscription not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Company subscription not found' });
     }
     res.status(200).json({ success: true, data: subscription });
   } catch (error) {
@@ -41,13 +45,22 @@ exports.updateCompanySubscription = async (req, res) => {
 };
 
 // Delete a company subscription by ID
-exports.deleteCompanySubscription = async (req, res) => {
+export const deleteCompanySubscription = async (req, res) => {
   try {
-    const subscription = await CompanySubscription.findByIdAndDelete(req.params.id);
+    const subscription = await CompanySubscription.findByIdAndDelete(
+      req.params.id
+    );
     if (!subscription) {
-      return res.status(404).json({ success: false, message: 'Company subscription not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Company subscription not found' });
     }
-    res.status(200).json({ success: true, message: 'Company subscription deleted successfully' });
+    res
+      .status(200)
+      .json({
+        success: true,
+        message: 'Company subscription deleted successfully',
+      });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

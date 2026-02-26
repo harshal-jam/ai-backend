@@ -1,4 +1,4 @@
-    const mongoose = require('mongoose');
+    import mongoose from 'mongoose';
     const chatbotConversationSchema = new mongoose.Schema({
     // Reference to chatbot
     chatbot_id: {
@@ -27,7 +27,7 @@
     },
     },{timestamps:true});
 
-    module.exports = mongoose.model(
+    export default mongoose.model(
     "ChatbotConversation",
     chatbotConversationSchema
     );

@@ -1,61 +1,40 @@
-const mongoose = require("mongoose");
-// const WorkingHourSchema = new mongoose.Schema({
-//   day: {
-//     type: String,
-//     enum: ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-//   },
-//   from: {
-//     type: String,
-//     default: null,
-//   },
-//   to: {
-//     type: String,
-//     default: null,
-//   },
-//   Of: {
-//     type: Boolean,
-//     default: false,
-//   },
-// });
+import mongoose from 'mongoose';
 
-const StaffSchema = new mongoose.Schema({
-  fullName: {
-    type: String,
-    required: true,
-    trim: true,
+const WorkingHourSchema = new mongoose.Schema(
+  {
+    day: { type: String, required: true },
+    from: { type: String },
+    to: { type: String },
+    isDayOff: { type: Boolean, default: false },
   },
-  email: {
-    type: String,
-    lowercase: true,
-    unique: true,
-  },
-  phone: {
-    type: String,
-  },
-  services: [
-    {
+  { _id: false }
+);
+
+const StaffSchema = new mongoose.Schema(
+  {
+    fullName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      lowercase: true,
+      unique: true,
+    },
+    phone: {
       type: String,
     },
-  ],
-  workingHours: {
-  day: {
-    type: String,
-    enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    services: [
+      {
+        type: String,
+      },
+    ],
+    workingHours: {
+      type: [WorkingHourSchema],
+      default: [],
+    },
   },
-  from: {
-    type: String,
-    default: null
-  },
-  to: {
-    type:String,
-    default: null
-  },
-  Of: {
-    type: Boolean,
-    default: false
-  }
-}
-
-}, { timestamps: true });
-
-module.exports = mongoose.model("Staff", StaffSchema);
+  { timestamps: true } // ✅ options go here
+);
+export default mongoose.model("Staff", StaffSchema);

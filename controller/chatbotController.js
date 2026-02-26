@@ -1,7 +1,7 @@
-const Chatbot = require('../model/chatbots');
+import Chatbot from '../model/chatbots.js';
 
 // Create a new chatbot
-exports.createChatbot = async (req, res) => {
+export const createChatbot = async (req, res) => {
   try {
     const chatbot = await Chatbot.create(req.body);
     res.status(201).json({ success: true, data: chatbot });
@@ -11,11 +11,13 @@ exports.createChatbot = async (req, res) => {
 };
 
 // Get a single chatbot by ID
-exports.findChatbot = async (req, res) => {
+export const findChatbot = async (req, res) => {
   try {
     const chatbot = await Chatbot.findById(req.params.id);
     if (!chatbot) {
-      return res.status(404).json({ success: false, message: 'Chatbot not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Chatbot not found' });
     }
     res.status(200).json({ success: true, data: chatbot });
   } catch (error) {
@@ -24,7 +26,7 @@ exports.findChatbot = async (req, res) => {
 };
 
 // Update a chatbot by ID
-exports.updateChatbot = async (req, res) => {
+export const updateChatbot = async (req, res) => {
   try {
     const chatbot = await Chatbot.findByIdAndUpdate(
       req.params.id,
@@ -32,7 +34,9 @@ exports.updateChatbot = async (req, res) => {
       { new: true }
     );
     if (!chatbot) {
-      return res.status(404).json({ success: false, message: 'Chatbot not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Chatbot not found' });
     }
     res.status(200).json({ success: true, data: chatbot });
   } catch (error) {
@@ -41,13 +45,17 @@ exports.updateChatbot = async (req, res) => {
 };
 
 // Delete a chatbot by ID
-exports.deleteChatbot = async (req, res) => {
+export const deleteChatbot = async (req, res) => {
   try {
     const chatbot = await Chatbot.findByIdAndDelete(req.params.id);
     if (!chatbot) {
-      return res.status(404).json({ success: false, message: 'Chatbot not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Chatbot not found' });
     }
-    res.status(200).json({ success: true, message: 'Chatbot deleted successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: 'Chatbot deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

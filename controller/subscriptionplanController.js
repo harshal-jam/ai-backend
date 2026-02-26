@@ -1,7 +1,7 @@
-const SubscriptionPlan = require('../model/subscription_plan');
+import SubscriptionPlan from '../model/subscription_plan.js';
 
 // Create a new subscription plan
-exports.createSubscriptionPlan = async (req, res) => {
+export const createSubscriptionPlan = async (req, res) => {
   try {
     const plan = await SubscriptionPlan.create(req.body);
     res.status(201).json({ success: true, data: plan });
@@ -11,11 +11,13 @@ exports.createSubscriptionPlan = async (req, res) => {
 };
 
 // Get a single subscription plan by ID
-exports.findSubscriptionPlan = async (req, res) => {
+export const findSubscriptionPlan = async (req, res) => {
   try {
     const plan = await SubscriptionPlan.findById(req.params.id);
     if (!plan) {
-      return res.status(404).json({ success: false, message: 'Subscription plan not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Subscription plan not found' });
     }
     res.status(200).json({ success: true, data: plan });
   } catch (error) {
@@ -24,7 +26,7 @@ exports.findSubscriptionPlan = async (req, res) => {
 };
 
 // Update a subscription plan by ID
-exports.updateSubscriptionPlan = async (req, res) => {
+export const updateSubscriptionPlan = async (req, res) => {
   try {
     const plan = await SubscriptionPlan.findByIdAndUpdate(
       req.params.id,
@@ -32,7 +34,9 @@ exports.updateSubscriptionPlan = async (req, res) => {
       { new: true }
     );
     if (!plan) {
-      return res.status(404).json({ success: false, message: 'Subscription plan not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Subscription plan not found' });
     }
     res.status(200).json({ success: true, data: plan });
   } catch (error) {
@@ -41,13 +45,17 @@ exports.updateSubscriptionPlan = async (req, res) => {
 };
 
 // Delete a subscription plan by ID
-exports.deleteSubscriptionPlan = async (req, res) => {
+export const deleteSubscriptionPlan = async (req, res) => {
   try {
     const plan = await SubscriptionPlan.findByIdAndDelete(req.params.id);
     if (!plan) {
-      return res.status(404).json({ success: false, message: 'Subscription plan not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Subscription plan not found' });
     }
-    res.status(200).json({ success: true, message: 'Subscription plan deleted successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: 'Subscription plan deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

@@ -1,7 +1,7 @@
-const Employee = require('../model/employee');
+import Employee from '../model/employee.js';
 
 // Create a new employee
-exports.createEmployee = async (req, res) => {
+export const createEmployee = async (req, res) => {
   try {
     const employee = await Employee.create(req.body);
     res.status(201).json({ success: true, data: employee });
@@ -11,11 +11,13 @@ exports.createEmployee = async (req, res) => {
 };
 
 // Get a single employee by ID
-exports.findEmployee = async (req, res) => {
+export const findEmployee = async (req, res) => {
   try {
     const employee = await Employee.findById(req.params.id);
     if (!employee) {
-      return res.status(404).json({ success: false, message: 'Employee not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Employee not found' });
     }
     res.status(200).json({ success: true, data: employee });
   } catch (error) {
@@ -24,7 +26,7 @@ exports.findEmployee = async (req, res) => {
 };
 
 // Update an employee by ID
-exports.updateEmployee = async (req, res) => {
+export const updateEmployee = async (req, res) => {
   try {
     const employee = await Employee.findByIdAndUpdate(
       req.params.id,
@@ -32,7 +34,9 @@ exports.updateEmployee = async (req, res) => {
       { new: true }
     );
     if (!employee) {
-      return res.status(404).json({ success: false, message: 'Employee not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Employee not found' });
     }
     res.status(200).json({ success: true, data: employee });
   } catch (error) {
@@ -41,13 +45,17 @@ exports.updateEmployee = async (req, res) => {
 };
 
 // Delete an employee by ID
-exports.deleteEmployee = async (req, res) => {
+export const deleteEmployee = async (req, res) => {
   try {
     const employee = await Employee.findByIdAndDelete(req.params.id);
     if (!employee) {
-      return res.status(404).json({ success: false, message: 'Employee not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Employee not found' });
     }
-    res.status(200).json({ success: true, message: 'Employee deleted successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: 'Employee deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

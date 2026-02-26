@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const businessSchema = new mongoose.Schema({
   owner_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -44,4 +43,4 @@ const businessSchema = new mongoose.Schema({
   timestamps: true 
 });
 
-module.exports = mongoose.model('Business', businessSchema);
+export default mongoose.model('Business', businessSchema);

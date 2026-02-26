@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-
+import mongoose from 'mongoose';
 const serviceSchema = new mongoose.Schema({
   business_id: {
     type: mongoose.Schema.Types.ObjectId,
@@ -31,4 +30,4 @@ const serviceSchema = new mongoose.Schema({
   timestamps: true 
 });
 
-module.exports = mongoose.model('Service', serviceSchema);
+export default mongoose.model('Service', serviceSchema);

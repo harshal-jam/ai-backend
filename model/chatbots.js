@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 const chatbotSchema = new mongoose.Schema({
   // Reference to business
   business_id: {
@@ -30,4 +30,4 @@ const chatbotSchema = new mongoose.Schema({
   },
 },{timestamps:true});
 
-module.exports = mongoose.model("Chatbot", chatbotSchema);
+export default mongoose.model("Chatbot", chatbotSchema);

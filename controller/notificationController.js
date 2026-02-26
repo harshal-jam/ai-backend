@@ -1,7 +1,7 @@
-const Notification = require('../model/notification');
+import Notification from '../model/notification.js';
 
 // Create a new notification
-exports.createNotification = async (req, res) => {
+export const createNotification = async (req, res) => {
   try {
     const notification = await Notification.create(req.body);
     res.status(201).json({ success: true, data: notification });
@@ -11,11 +11,13 @@ exports.createNotification = async (req, res) => {
 };
 
 // Get a single notification by ID
-exports.findNotification = async (req, res) => {
+export const findNotification = async (req, res) => {
   try {
     const notification = await Notification.findById(req.params.id);
     if (!notification) {
-      return res.status(404).json({ success: false, message: 'Notification not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Notification not found' });
     }
     res.status(200).json({ success: true, data: notification });
   } catch (error) {
@@ -24,7 +26,7 @@ exports.findNotification = async (req, res) => {
 };
 
 // Update a notification by ID
-exports.updateNotification = async (req, res) => {
+export const updateNotification = async (req, res) => {
   try {
     const notification = await Notification.findByIdAndUpdate(
       req.params.id,
@@ -32,7 +34,9 @@ exports.updateNotification = async (req, res) => {
       { new: true }
     );
     if (!notification) {
-      return res.status(404).json({ success: false, message: 'Notification not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Notification not found' });
     }
     res.status(200).json({ success: true, data: notification });
   } catch (error) {
@@ -41,13 +45,17 @@ exports.updateNotification = async (req, res) => {
 };
 
 // Delete a notification by ID
-exports.deleteNotification = async (req, res) => {
+export const deleteNotification = async (req, res) => {
   try {
     const notification = await Notification.findByIdAndDelete(req.params.id);
     if (!notification) {
-      return res.status(404).json({ success: false, message: 'Notification not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Notification not found' });
     }
-    res.status(200).json({ success: true, message: 'Notification deleted successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: 'Notification deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

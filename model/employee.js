@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const employeeSchema = new mongoose.Schema({
   
   business_id: {
@@ -39,6 +39,6 @@ const employeeSchema = new mongoose.Schema({
   },
 },{timestamps:true});
 
-module.exports = mongoose.model("Employee", employeeSchema);
+export default mongoose.model("Employee", employeeSchema);
 
 

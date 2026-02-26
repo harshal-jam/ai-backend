@@ -1,7 +1,7 @@
-const EmployeeSlot = require('../model/employeeSlots');
+import EmployeeSlot from '../model/employeeSlots.js';
 
 // Create a new employee slot
-exports.createEmployeeSlot = async (req, res) => {
+export const createEmployeeSlot = async (req, res) => {
   try {
     const slot = await EmployeeSlot.create(req.body);
     res.status(201).json({ success: true, data: slot });
@@ -11,11 +11,13 @@ exports.createEmployeeSlot = async (req, res) => {
 };
 
 // Get a single employee slot by ID
-exports.findEmployeeSlot = async (req, res) => {
+export const findEmployeeSlot = async (req, res) => {
   try {
     const slot = await EmployeeSlot.findById(req.params.id);
     if (!slot) {
-      return res.status(404).json({ success: false, message: 'Employee slot not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Employee slot not found' });
     }
     res.status(200).json({ success: true, data: slot });
   } catch (error) {
@@ -24,7 +26,7 @@ exports.findEmployeeSlot = async (req, res) => {
 };
 
 // Update an employee slot by ID
-exports.updateEmployeeSlot = async (req, res) => {
+export const updateEmployeeSlot = async (req, res) => {
   try {
     const slot = await EmployeeSlot.findByIdAndUpdate(
       req.params.id,
@@ -32,7 +34,9 @@ exports.updateEmployeeSlot = async (req, res) => {
       { new: true }
     );
     if (!slot) {
-      return res.status(404).json({ success: false, message: 'Employee slot not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Employee slot not found' });
     }
     res.status(200).json({ success: true, data: slot });
   } catch (error) {
@@ -41,13 +45,17 @@ exports.updateEmployeeSlot = async (req, res) => {
 };
 
 // Delete an employee slot by ID
-exports.deleteEmployeeSlot = async (req, res) => {
+export const deleteEmployeeSlot = async (req, res) => {
   try {
     const slot = await EmployeeSlot.findByIdAndDelete(req.params.id);
     if (!slot) {
-      return res.status(404).json({ success: false, message: 'Employee slot not found' });
+      return res
+        .status(404)
+        .json({ success: false, message: 'Employee slot not found' });
     }
-    res.status(200).json({ success: true, message: 'Employee slot deleted successfully' });
+    res
+      .status(200)
+      .json({ success: true, message: 'Employee slot deleted successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
